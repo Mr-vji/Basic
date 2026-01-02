@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, useGLTF } from "@react-three/drei";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
@@ -23,16 +23,13 @@ const capMaterial = new THREE.MeshStandardMaterial({
   envMapIntensity: 20,
 });
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
-const baubles = [...Array(30)].map(() => ({
-  scale: [0.75, 0.75, 1, 1, 1.25][Math.floor(Math.random() * 5)],
-}));
 
 // ========== ADJUST CURSOR POWER HERE ==========
-const CURSOR_POWER = 200; // Increase this number to make cursor push baubles harder (default: 100, try: 200, 300, 500)
+const CURSOR_POWER = 200;
 // ==============================================
 
 // ========== ADJUST BALL SPEED HERE ==========
-const BALL_DAMPING = 2.5; // Increase this number to make balls move slower (default: 0.75, try: 1.5, 2.5, 3.5)
+const BALL_DAMPING = 2.5;
 // ============================================
 
 function Bauble({
@@ -114,34 +111,47 @@ function Pointer({ vec = new THREE.Vector3() }) {
   );
 }
 
-export const App = () => (
-  <Canvas
-    shadows
-    gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-    camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-    onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
-  >
-    <ambientLight intensity={1.5} />
-    <spotLight
-      position={[15, 15, 20]}
-      penumbra={1}
-      angle={0.3}
-      color="white"
-      castShadow
-      shadow-mapSize={[512, 512]}
-      intensity={2}
-    />
-    <directionalLight position={[10, 10, 5]} intensity={1.5} />
-    <directionalLight position={[0, -10, 0]} intensity={1} color="red" />
-    <Physics gravity={[0, 0, 0]}>
-      <Pointer />
-      {
-        baubles.map((props, i) => <Bauble key={i} {...props} />) /* prettier-ignore */
-      }
-    </Physics>
-    <Environment preset="city" />
-    <EffectComposer disableNormalPass>
-      <N8AO color="blue" aoRadius={2} intensity={2.15} />
-    </EffectComposer>
-  </Canvas>
-);
+export const App = () => {
+  const baubles = useMemo(() => {
+    const isMobile = window.innerWidth <= 768;
+    const scaleOptions = isMobile
+      ? [0.5, 0.5, 0.65, 0.65, 0.8]
+      : [0.75, 0.75, 1, 1, 1.25];
+
+    return [...Array(30)].map(() => ({
+      scale: scaleOptions[Math.floor(Math.random() * scaleOptions.length)],
+    }));
+  }, []);
+
+  return (
+    <Canvas
+      shadows
+      gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
+      camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
+      onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
+    >
+      <ambientLight intensity={1.5} />
+      <spotLight
+        position={[15, 15, 20]}
+        penumbra={1}
+        angle={0.3}
+        color="white"
+        castShadow
+        shadow-mapSize={[512, 512]}
+        intensity={2}
+      />
+      <directionalLight position={[10, 10, 5]} intensity={1.5} />
+      <directionalLight position={[0, -10, 0]} intensity={1} color="red" />
+      <Physics gravity={[0, 0, 0]}>
+        <Pointer />
+        {
+          baubles.map((props, i) => <Bauble key={i} {...props} />) /* prettier-ignore */
+        }
+      </Physics>
+      <Environment preset="city" />
+      <EffectComposer disableNormalPass>
+        <N8AO color="blue" aoRadius={2} intensity={2.15} />
+      </EffectComposer>
+    </Canvas>
+  );
+};

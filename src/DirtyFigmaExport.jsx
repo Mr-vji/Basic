@@ -28,41 +28,68 @@ export function Underlay() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          zIndex: 10,
+          pointerEvents: "all",
         }}
       >
-        <img
-          src="./YESCA_FULL_LOGO.svg"
-          alt="Brand Logo"
+        <a
+          href="https://www.yesca.in"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
-            height: 30,
-            maxWidth: "clamp(100px, 15vw, 200px)",
-            objectFit: "contain",
-            margin: 0,
-          }}
-        />
-        <p
-          style={{
-            height: 30,
-            fontSize: "clamp(20px, 5vw, 30px)",
-            lineHeight: "30px",
-            color: "black",
-            margin: 0,
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+            cursor: "pointer",
           }}
         >
-          ⎑
-        </p>
+          <img
+            src="./YESCA_FULL_LOGO.svg"
+            alt="Brand Logo"
+            style={{
+              height: 30,
+              maxWidth: "clamp(100px, 15vw, 200px)",
+              objectFit: "contain",
+              margin: 0,
+            }}
+          />
+        </a>
+
+        <a
+          href="https://www.yesca.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+            cursor: "pointer",
+          }}
+        >
+          <img
+            src="./yy.svg"
+            alt="Brand Logo"
+            style={{
+              height: 30,
+              maxWidth: "clamp(100px, 15vw, 200px)",
+              objectFit: "contain",
+              margin: 0,
+            }}
+          />
+        </a>
       </div>
 
       {/* Left Side Text */}
       <div
         style={{
           position: "absolute",
-          left: 40,
+          left: window.innerWidth <= 768 ? "clamp(10px, 2vw, 20px)" : "40px",
           top: "50%",
           transform: "translateY(-50%)",
           fontSize: "clamp(11px, 2vw, 12px)",
           lineHeight: "1.5em",
           color: "black",
+          maxWidth: "clamp(100px, 20vw, 150px)",
         }}
       >
         <b>Yesca Technologies Product</b>
@@ -76,7 +103,7 @@ export function Underlay() {
       <div
         style={{
           position: "absolute",
-          right: 40,
+          right: window.innerWidth <= 768 ? "clamp(10px, 2vw, 20px)" : "40px",
           top: "50%",
           transform: "translateY(-50%) rotate(90deg)",
           transformOrigin: "center",
@@ -125,8 +152,8 @@ export function Underlay() {
           width: "calc(100% - 80px)",
           pointerEvents: "all",
           display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-end",
+          flexDirection: window.innerWidth <= 768 ? "column" : "row",
+          alignItems: window.innerWidth <= 768 ? "center" : "flex-end",
           justifyContent: "space-between",
           gap: "20px",
         }}
@@ -137,6 +164,7 @@ export function Underlay() {
             fontSize: "clamp(11px, 2vw, 12px)",
             lineHeight: "1.5em",
             color: "black",
+            textAlign: window.innerWidth <= 768 ? "center" : "left",
           }}
         >
           <b>Launching Soon</b>
