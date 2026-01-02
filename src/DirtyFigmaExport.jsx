@@ -92,11 +92,9 @@ export function Underlay() {
           maxWidth: "clamp(100px, 20vw, 150px)",
         }}
       >
-        <b>Yesca Technologies Product</b>
         <br />
-        Coming Very Soon
+
         <br />
-        <b>—</b>
       </div>
 
       {/* Right Side Vertical Text */}
@@ -167,9 +165,7 @@ export function Underlay() {
             textAlign: window.innerWidth <= 768 ? "center" : "left",
           }}
         >
-          <b>Launching Soon</b>
           <br />
-          Stay Tuned for Updates
         </div>
 
         <p
@@ -186,7 +182,7 @@ export function Underlay() {
             margin: 0,
           }}
         >
-          COMING SOON
+          Coming soon — a space to connect in faith.
         </p>
 
         <div style={{ flex: 1 }}></div>
@@ -196,20 +192,5 @@ export function Underlay() {
 }
 
 export function Overlay() {
-  return (
-    <div style={{ position: "absolute", bottom: 40, right: 40 }}>
-      <p
-        style={{
-          fontSize: "clamp(11px, 2vw, 12px)",
-          lineHeight: "1em",
-          textAlign: "right",
-          color: "black",
-          margin: 0,
-        }}
-      >
-        <a href="yesca.in/">website</a> <a href="yesca.in">git</a>{" "}
-        <a href="yesca.in">social</a>
-      </p>
-    </div>
-  );
+  return <div style={{ position: "absolute", bottom: 40, right: 40 }}></div>;
 }
