@@ -12,7 +12,7 @@ import {
 
 THREE.ColorManagement.legacyMode = false;
 const baubleMaterial = new THREE.MeshLambertMaterial({
-  color: "#c0a0a0",
+  color: "#a0a7c0ff",
   emissive: "red",
 });
 const capMaterial = new THREE.MeshStandardMaterial({
@@ -23,9 +23,17 @@ const capMaterial = new THREE.MeshStandardMaterial({
   envMapIntensity: 20,
 });
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
-const baubles = [...Array(50)].map(() => ({
+const baubles = [...Array(30)].map(() => ({
   scale: [0.75, 0.75, 1, 1, 1.25][Math.floor(Math.random() * 5)],
 }));
+
+// ========== ADJUST CURSOR POWER HERE ==========
+const CURSOR_POWER = 200; // Increase this number to make cursor push baubles harder (default: 100, try: 200, 300, 500)
+// ==============================================
+
+// ========== ADJUST BALL SPEED HERE ==========
+const BALL_DAMPING = 2.5; // Increase this number to make balls move slower (default: 0.75, try: 1.5, 2.5, 3.5)
+// ============================================
 
 function Bauble({
   vec = new THREE.Vector3(),
@@ -41,15 +49,15 @@ function Bauble({
         .copy(api.current.translation())
         .normalize()
         .multiply({
-          x: -50 * delta * scale,
-          y: -150 * delta * scale,
-          z: -50 * delta * scale,
+          x: -150 * delta * scale,
+          y: -250 * delta * scale,
+          z: -350 * delta * scale,
         })
     );
   });
   return (
     <RigidBody
-      linearDamping={0.75}
+      linearDamping={BALL_DAMPING}
       angularDamping={0.15}
       friction={0.2}
       position={[r(20), r(20) - 25, r(20) - 10]}

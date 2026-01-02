@@ -30,20 +30,16 @@ export function Underlay() {
           justifyContent: "space-between",
         }}
       >
-        <p
+        <img
+          src="./YESCA_FULL_LOGO.svg"
+          alt="Brand Logo"
           style={{
-            fontFamily: "'Antonio', sans-serif",
             height: 30,
-            fontSize: "clamp(20px, 5vw, 30px)",
-            fontWeight: "700",
-            lineHeight: "30px",
-            color: "black",
-            letterSpacing: -2,
+            maxWidth: "clamp(100px, 15vw, 200px)",
+            objectFit: "contain",
             margin: 0,
           }}
-        >
-          YOUR BRAND
-        </p>
+        />
         <p
           style={{
             height: 30,
@@ -69,7 +65,7 @@ export function Underlay() {
           color: "black",
         }}
       >
-        <b>Revolutionary Product</b>
+        <b>Yesca Technologies Product</b>
         <br />
         Coming Very Soon
         <br />
@@ -102,19 +98,19 @@ export function Underlay() {
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
-          maxWidth: "1800px",
+          maxWidth: "600px",
           aspect: "1 / 1",
         }}
       >
         <img
-          src="./logo.jpeg"
+          src="./basic.png"
           alt="Product Logo"
           style={{
             width: "100%",
             height: "100%",
             objectFit: "contain",
-            maxWidth: "1000vw",
-            maxHeight: "1000vh",
+            maxWidth: "80vw",
+            maxHeight: "80vh",
           }}
         />
       </div>
@@ -183,9 +179,8 @@ export function Overlay() {
           margin: 0,
         }}
       >
-        <a href="https://yourwebsite.com/">website</a>{" "}
-        <a href="https://github.com/yourprofile">git</a>{" "}
-        <a href="https://twitter.com/yourprofile">social</a>
+        <a href="yesca.in/">website</a> <a href="yesca.in">git</a>{" "}
+        <a href="yesca.in">social</a>
       </p>
     </div>
   );
