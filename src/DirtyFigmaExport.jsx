@@ -112,9 +112,7 @@ export function Underlay() {
           color: "black",
           whiteSpace: "nowrap",
         }}
-      >
-        DRAG POINTER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ●
-      </div>
+      ></div>
 
       {/* Center Image - Fully Responsive */}
       <div
@@ -172,14 +170,15 @@ export function Underlay() {
           style={{
             fontFamily: "'Antonio', sans-serif",
             flex: 1,
-            fontSize: "clamp(14px, 3vw, 16px)",
+            fontSize: "clamp(18px, 4vw, 22px)", // increased size
             fontWeight: "700",
-            lineHeight: "1em",
+            lineHeight: "1.2em",
             textAlign: "center",
-            color: "black",
+            color: "#2661ff",
             letterSpacing: -0.5,
             whiteSpace: "nowrap",
             margin: 0,
+            textcolor: "#2661ff",
           }}
         >
           Coming soon — a space to connect in faith.
