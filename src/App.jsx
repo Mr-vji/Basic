@@ -24,13 +24,8 @@ const capMaterial = new THREE.MeshStandardMaterial({
 });
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
-// ========== ADJUST CURSOR POWER HERE ==========
 const CURSOR_POWER = 200;
-// ==============================================
-
-// ========== ADJUST BALL SPEED HERE ==========
 const BALL_DAMPING = 2.5;
-// ============================================
 
 function Bauble({
   vec = new THREE.Vector3(),
@@ -126,9 +121,19 @@ export const App = () => {
   return (
     <Canvas
       shadows
-      gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
+      dpr={[1, 1.5]}
+      gl={{
+        alpha: true,
+        stencil: false,
+        depth: false,
+        antialias: false,
+        powerPreference: "high-performance",
+      }}
       camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-      onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
+      onCreated={(state) => {
+        state.gl.toneMappingExposure = 1.5;
+        state.gl.shadowMap.type = THREE.BasicShadowMap;
+      }}
     >
       <ambientLight intensity={1.5} />
       <spotLight
@@ -144,13 +149,13 @@ export const App = () => {
       <directionalLight position={[0, -10, 0]} intensity={1} color="red" />
       <Physics gravity={[0, 0, 0]}>
         <Pointer />
-        {
-          baubles.map((props, i) => <Bauble key={i} {...props} />) /* prettier-ignore */
-        }
+        {baubles.map((props, i) => (
+          <Bauble key={i} {...props} />
+        ))}
       </Physics>
       <Environment preset="city" />
-      <EffectComposer disableNormalPass>
-        <N8AO color="blue" aoRadius={2} intensity={2.15} />
+      <EffectComposer disableNormalPass multisampling={0}>
+        <N8AO color="blue" aoRadius={2} intensity={1.5} />
       </EffectComposer>
     </Canvas>
   );
